@@ -60,7 +60,6 @@ PACKAGES="$PACKAGES luci-i18n-homeproxy-zh-cn"
 PACKAGES="$PACKAGES openssh-sftp-server"
 PACKAGES="$PACKAGES luci-i18n-samba4-zh-cn"
 # xin
-PACKAGES="$PACKAGES luci-i18n-opkg-zh-cn"
 PACKAGES="$PACKAGES kmod-ath"
 PACKAGES="$PACKAGES kmod-ath9k"
 PACKAGES="$PACKAGES kmod-ath9k-common"
