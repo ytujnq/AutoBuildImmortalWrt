@@ -3,8 +3,7 @@
 # Log file for debugging
 LOGFILE="/tmp/uci-defaults-log.txt"
 echo "Starting 99-custom.sh at $(date)" >>$LOGFILE
-# 设置默认防火墙规则，方便虚拟机首次访问 WebUI
-uci set firewall.@zone[1].input='ACCEPT'
+
 
 # 设置主机名映射，解决安卓原生 TV 无法联网的问题
 uci add dhcp domain
@@ -78,7 +77,7 @@ elif [ "$count" -gt 1 ]; then
     # 大家不能胡乱修改哦 比如有人修改为192.168.100.55 这是错误的理解 这个项目不能提前设置旁路地址
     # 旁路的设置分2类情况,情况一是单网口的设备,默认是DHCP模式，ip应该在上一级路由器里查看。之后进入web页在设置旁路。
     # 情况二旁路由如果是多网口设备，也应当用网关访问网页后，在自行在web网页里设置。总之大家不能直接在代码里修改旁路网关。千万不要徒增bug啦。
-    uci set network.lan.ipaddr='192.168.100.1'
+    uci set network.lan.ipaddr='192.168.80.1'
     uci set network.lan.netmask='255.255.255.0'
     echo "set 192.168.100.1 at $(date)" >>$LOGFILE
     # 判断是否启用 PPPoE
@@ -148,16 +147,9 @@ else
     echo "未检测到 Docker，跳过防火墙配置。"
 fi
 
-# 设置所有网口可访问网页终端
-uci delete ttyd.@ttyd[0].interface
-
-# 设置所有网口可连接 SSH
-uci set dropbear.@dropbear[0].Interface=''
-uci commit
-
 # 设置编译作者信息
 FILE_PATH="/etc/openwrt_release"
-NEW_DESCRIPTION="Compiled by wukongdaily"
+NEW_DESCRIPTION="Compiled by xin"
 sed -i "s/DISTRIB_DESCRIPTION='[^']*'/DISTRIB_DESCRIPTION='$NEW_DESCRIPTION'/" "$FILE_PATH"
 
 exit 0
